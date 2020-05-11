@@ -24,48 +24,37 @@ Options: {"project": {"partners": 0}}
 Query: {{"category_code": {"$type": "null"} }}
 
 ### 8. All the companies that have at least 100 employees but less than 1000. Retrieve only the `name` and `number of employees` fields.
-Query: {{"category_code": {"$type": "null"} }}
+Query: {"number_of_employees": {"$gte": 100, "$lt": 1000}} Options: {"project": {"name": 1,"number_of_employees": 1 }}
 
 ### 9. Order all the companies by their IPO price in a descending order.
-
-<!-- Your Code Goes Here -->
+Options: {"sort": {"ipo.valuation_amount": -1 }}
 
 ### 10. Retrieve the 10 companies with more employees, order by the `number of employees`
-
-<!-- Your Code Goes Here -->
+Query: {"number_of_employees": {"gt": 1}} Options: {"sort": {"number_of_employees": -1} limit: 10}
 
 ### 11. All the companies founded on the second semester of the year. Limit your search to 1000 companies.
-
-<!-- Your Code Goes Here -->
+Query: {"founded_month": {"$gt": 5}} Options: "limit": 1000
 
 ### 12. All the companies founded before 2000 that have an acquisition amount of more than 10.000.000
-
-<!-- Your Code Goes Here -->
+Query: {"founded_year": {"$lte": 2000}, "acquisition.price_amount": {"$gte": 10000000} }
 
 ### 13. All the companies that have been acquired after 2010, order by the acquisition amount, and retrieve only their `name` and `acquisition` field.
-
-<!-- Your Code Goes Here -->
+Query: {"acquisition.acquired_year": {"$gte": 2010}} Options: { "project": {"name": 1, "acquisition": 1} sort": {"acquisition.acquired_month": 1}}
 
 ### 14. Order the companies by their `founded year`, retrieving only their `name` and `founded year`.
-
-<!-- Your Code Goes Here -->
+Options: {"project": {"name": 1, "founded_year": 1} "sort": {"founded_year" : 1} }
 
 ### 15. All the companies that have been founded on the first seven days of the month, including the seventh. Sort them by their `acquisition price` in a descending order. Limit the search to 10 documents.
-
-<!-- Your Code Goes Here -->
+Query: {"founded_day": {"$lte": 7}} Options: {"sort": {"acquisition.price_amount": -1} limit: 10}
 
 ### 16. All the companies on the 'web' `category` that have more than 4000 employees. Sort them by the amount of employees in ascending order.
-
-<!-- Your Code Goes Here -->
+Query: {"number_of_employees": {"$lt": 4000}, "category_code": {"$eq": "web"}} Options: {"sort": {"number_of_employees": 1}}
 
 ### 17. All the companies whose acquisition amount is more than 10.000.000, and currency is 'EUR'.
-
-<!-- Your Code Goes Here -->
+Query: {"acquisition.price_amount": {"$lt": 10000000}, "acquisition.price_currency_code": {"$eq": "EUR"}}
 
 ### 18. All the companies that have been acquired on the first trimester of the year. Limit the search to 10 companies, and retrieve only their `name` and `acquisition` fields.
-
-<!-- Your Code Goes Here -->
+Query: {"acquisition.acquired_month": {"$lte":3}} Options: {"project": {"name": 1, "acquisition": 1}}
 
 ### 19. All the companies that have been founded between 2000 and 2010, but have not been acquired before 2011.
-
-<!-- Your Code Goes Here -->
+Query: {"founded_year": {"$gte": 2000, "$lte": 2010}, "acquisition.acquired_year": {"$gte": 2011}}
